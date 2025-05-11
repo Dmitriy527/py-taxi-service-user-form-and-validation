@@ -38,23 +38,17 @@ class DriverForm(BaseDriverForm):
     class Meta:
         model = Driver
         fields = (
-            "password",
-            "is_superuser",
-            "user_permissions",
             "username",
             "first_name",
             "last_name",
             "email",
-            "is_staff",
-            "is_active",
-            "date_joined",
             "license_number",
         )
 
 
 class CarForm(forms.ModelForm):
     drivers = forms.ModelMultipleChoiceField(
-        queryset=get_user_model().objects.all(),
+        queryset=Driver.objects.all(),
         widget=CheckboxSelectMultiple(),
         required=False,
     )

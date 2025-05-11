@@ -85,9 +85,10 @@ def assign_driver_to_car(
         request: HttpRequest,
         pk: int
 ) -> HttpResponseRedirect:
-    car = Car.objects.get(pk=pk)
-    car.drivers.add(request.user)
-    car.save()
+    if request.user.is_authenticated and isinstance(request.user, Driver):
+        car = Car.objects.get(pk=pk)
+        car.drivers.add(request.user)
+        car.save()
     return redirect("taxi:car-detail", pk=pk)
 
 
