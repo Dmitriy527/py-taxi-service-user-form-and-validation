@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-  <p>Ви дійсно хочете видалити водія: {{ driver }}</p>
+  <p>Ви дійсно хочете видалити водія: {{ object }}</p>
   <form action="" method="post">
     {% csrf_token %}
     <input type="submit" value="Yes, delete" class="btn badge-danger">

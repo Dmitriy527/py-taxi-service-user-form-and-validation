@@ -96,9 +96,10 @@ def delete_driver_from_car(
         request: HttpRequest,
         pk: int
 ) -> HttpResponseRedirect:
-    car = Car.objects.get(pk=pk)
-    car.drivers.remove(request.user)
-    car.save()
+    if request.user.is_authenticated and isinstance(request.user, Driver):
+        car = Car.objects.get(pk=pk)
+        car.drivers.remove(request.user)
+        car.save()
     return redirect("taxi:car-detail", pk=pk)
 
 
