@@ -13,12 +13,13 @@ class BaseDriverForm(forms.ModelForm):
             raise ValidationError(
                 "Ліцензійний номер має складатись із восьми символів"
             )
-        elif not license_number[:3].isupper():
-            raise ValidationError(
-                "Перші три символи ліцензійного "
-                "номера мають бути великими літерами"
+        for char in license_number[:3]:
+            if not char.isupper():
+                raise ValidationError(
+                    "Перші три символи ліцензійного "
+                    "номера мають бути великими літерами"
             )
-        elif not license_number[3:].isdigit():
+        if not license_number[3:].isdigit():
             raise ValidationError(
                 "Останні п'ять символів ліцензійного номера мають бути цифрами"
             )
@@ -26,7 +27,7 @@ class BaseDriverForm(forms.ModelForm):
         return license_number
 
 
-class LicenseForm(BaseDriverForm):
+class DriverLicenseUpdateForm(BaseDriverForm):
     class Meta:
         model = Driver
         fields = ("license_number",)
