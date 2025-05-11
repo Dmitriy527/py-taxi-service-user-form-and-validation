@@ -81,6 +81,7 @@ class CarDeleteView(LoginRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy("taxi:car-list")
 
 
+@login_required
 def assign_driver_to_car(
         request: HttpRequest,
         pk: int
@@ -92,6 +93,7 @@ def assign_driver_to_car(
     return redirect("taxi:car-detail", pk=pk)
 
 
+@login_required
 def delete_driver_from_car(
         request: HttpRequest,
         pk: int
