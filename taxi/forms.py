@@ -18,7 +18,8 @@ class BaseDriverForm(forms.ModelForm):
                 raise ValidationError(
                     "Перші три символи ліцензійного "
                     "номера мають бути великими літерами"
-            )
+                )
+
         if not license_number[3:].isdigit():
             raise ValidationError(
                 "Останні п'ять символів ліцензійного номера мають бути цифрами"
